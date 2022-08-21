@@ -1,6 +1,7 @@
 plugins {
     id 'org.springframework.boot' version '2.7.3'
     id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+    id 'com.google.cloud.tools.jib' version '3.2.1'
     id 'java'
 }
 
@@ -27,4 +28,10 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+if(project.hasProperty('prod')) {
+    apply from: rootProject.file('profile_prod.gradle');
+} else {
+    apply from: rootProject.file('profile_local.gradle');
 }

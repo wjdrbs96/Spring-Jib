@@ -1,0 +1,13 @@
+jib {
+    to {
+        image = "736769889825.dkr.ecr.ap-northeast-2.amazonaws.com/gyunny-api"
+        tags = ["local-" + System.currentTimeMillis()]
+    }
+    container {
+        jvmFlags = ['-Dspring.profiles.active=local', '-XX:+UseContainerSupport',
+                    '-Dserver.port=8081', '-Dfile.encoding=UTF-8']
+        ports = ['8081']
+        user = "nobody:nogroup"
+        volumes = ['/logs']
+    }
+}
